@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-BindGlobal( "ADD_FUNCTIONS_FOR_CategoryOfColumnsAsOppositeOfCategoryOfRowsOfFieldPrecompiled", function ( cat )
+BindGlobal( "ADD_FUNCTIONS_FOR_CategoryOfColumns_as_Opposite_CategoryOfRows_Field_precompiled", function ( cat )
     
     ##
     AddAdditionForMorphisms( cat,
@@ -1078,7 +1078,7 @@ end
     
 end );
 
-BindGlobal( "CategoryOfColumnsAsOppositeOfCategoryOfRowsOfFieldPrecompiled", function ( homalg_ring )
+BindGlobal( "CategoryOfColumns_as_Opposite_CategoryOfRows_Field_precompiled", function ( homalg_ring )
   local category_constructor, cat;
     
     category_constructor :=
@@ -1092,7 +1092,7 @@ end;
     
     cat := category_constructor( homalg_ring : FinalizeCategory := false, no_precompiled_code := true );
     
-    ADD_FUNCTIONS_FOR_CategoryOfColumnsAsOppositeOfCategoryOfRowsOfFieldPrecompiled( cat );
+    ADD_FUNCTIONS_FOR_CategoryOfColumns_as_Opposite_CategoryOfRows_Field_precompiled( cat );
     
     Finalize( cat );
     

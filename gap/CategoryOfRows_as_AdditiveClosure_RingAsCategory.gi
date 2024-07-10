@@ -11,7 +11,7 @@
 ####################################
 
 ##
-InstallMethod( CategoryOfRowsAsAdditiveClosureOfRingAsCategory,
+InstallMethod( CategoryOfRows_as_AdditiveClosure_RingAsCategory,
                [ IsHomalgRing ],
                
   function( homalg_ring )

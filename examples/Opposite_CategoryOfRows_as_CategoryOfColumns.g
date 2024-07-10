@@ -4,7 +4,7 @@
 
 #! Assume that we have the constructors `CategoryOfRows` and `CategoryOfColumns` but no constructor `Opposite`.
 #! Then we can still model `Opposite( CategoryOfRows )` as `CategoryOfColumns` using `ReinterpretationOfCategory`.
-#! This can be achieved up to minor modifications by swapping `object_constructor` and `modeling_tower_object_constructor` and so on in `CategoryOfColumsAsOppositeOfCategoryOfRows`.
+#! This can be achieved up to minor modifications by swapping `object_constructor` and `modeling_tower_object_constructor` and so on in `CategoryOfColums_as_Opposite_CategoryOfRows`.
 #! With this, objects and morphisms indeed have the attribute `Opposite` as desired.
 #! Getting `ObjectDatum` and `MorphismDatum` to return this attribute would also be possible, but would require more effort than simply swapping `object_constructor` and `modeling_tower_object_constructor` and so.
 

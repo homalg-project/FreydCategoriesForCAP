@@ -3,7 +3,7 @@
 #
 # Declarations
 #
-#! @Chapter Category of columns
+#! @Chapter CoFreyd category
 
 ####################################
 ##
@@ -11,7 +11,5 @@
 ##
 ####################################
 
-DeclareOperation( "CategoryOfColumnsAsOppositeOfCategoryOfRows",
-                  [ IsHomalgRing ] );
-
-DeclareGlobalFunction( "INSTALL_FUNCTIONS_FOR_CATEGORY_OF_COLUMNS_AS_OPPOSITE_OF_CATEGORY_OF_ROWS" );
+DeclareOperation( "CoFreydCategory_as_Opposite_FreydCategory_Opposite",
+                  [ IsCapCategory ] );

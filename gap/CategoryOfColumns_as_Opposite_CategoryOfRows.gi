@@ -11,7 +11,7 @@
 ####################################
 
 ##
-InstallMethod( CategoryOfColumnsAsOppositeOfCategoryOfRows,
+InstallMethod( CategoryOfColumns_as_Opposite_CategoryOfRows,
                [ IsHomalgRing ],
                
   function( homalg_ring )

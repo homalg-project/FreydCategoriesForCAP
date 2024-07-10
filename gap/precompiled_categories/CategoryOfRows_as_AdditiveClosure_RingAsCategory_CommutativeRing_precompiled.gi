@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-BindGlobal( "ADD_FUNCTIONS_FOR_CategoryOfRowsAsAdditiveClosureOfRingAsCategoryOfCommutativeRingPrecompiled", function ( cat )
+BindGlobal( "ADD_FUNCTIONS_FOR_CategoryOfRows_as_AdditiveClosure_RingAsCategory_CommutativeRing_precompiled", function ( cat )
     
     ##
     AddAdditionForMorphisms( cat,
@@ -920,7 +920,7 @@ end
     
 end );
 
-BindGlobal( "CategoryOfRowsAsAdditiveClosureOfRingAsCategoryOfCommutativeRingPrecompiled", function ( homalg_ring )
+BindGlobal( "CategoryOfRows_as_AdditiveClosure_RingAsCategory_CommutativeRing_precompiled", function ( homalg_ring )
   local category_constructor, cat;
     
     category_constructor :=
@@ -934,7 +934,7 @@ end;
     
     cat := category_constructor( homalg_ring : FinalizeCategory := false, no_precompiled_code := true );
     
-    ADD_FUNCTIONS_FOR_CategoryOfRowsAsAdditiveClosureOfRingAsCategoryOfCommutativeRingPrecompiled( cat );
+    ADD_FUNCTIONS_FOR_CategoryOfRows_as_AdditiveClosure_RingAsCategory_CommutativeRing_precompiled( cat );
     
     Finalize( cat );
     

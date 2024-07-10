@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-BindGlobal( "ADD_FUNCTIONS_FOR_CategoryOfColumnsAsOppositeOfCategoryOfRowsOfHomalgExteriorRingOverFieldPrecompiled", function ( cat )
+BindGlobal( "ADD_FUNCTIONS_FOR_CategoryOfColumns_as_Opposite_CategoryOfRows_HomalgExteriorRingOverField_precompiled", function ( cat )
     
     ##
     AddAdditionForMorphisms( cat,
@@ -756,7 +756,7 @@ end
     
 end );
 
-BindGlobal( "CategoryOfColumnsAsOppositeOfCategoryOfRowsOfHomalgExteriorRingOverFieldPrecompiled", function ( homalg_ring )
+BindGlobal( "CategoryOfColumns_as_Opposite_CategoryOfRows_HomalgExteriorRingOverField_precompiled", function ( homalg_ring )
   local category_constructor, cat;
     
     category_constructor :=
@@ -770,7 +770,7 @@ end;
     
     cat := category_constructor( homalg_ring : FinalizeCategory := false, no_precompiled_code := true );
     
-    ADD_FUNCTIONS_FOR_CategoryOfColumnsAsOppositeOfCategoryOfRowsOfHomalgExteriorRingOverFieldPrecompiled( cat );
+    ADD_FUNCTIONS_FOR_CategoryOfColumns_as_Opposite_CategoryOfRows_HomalgExteriorRingOverField_precompiled( cat );
     
     Finalize( cat );
     

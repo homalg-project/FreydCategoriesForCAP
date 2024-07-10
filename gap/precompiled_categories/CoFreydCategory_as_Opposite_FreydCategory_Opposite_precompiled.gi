@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-BindGlobal( "ADD_FUNCTIONS_FOR_CoFreydCategoryAsOppositeOfFreydCategoryOfOppositePrecompiled", function ( cat )
+BindGlobal( "ADD_FUNCTIONS_FOR_CoFreydCategory_as_Opposite_FreydCategory_Opposite_precompiled", function ( cat )
     
     ##
     AddAdditionForMorphisms( cat,
@@ -354,21 +354,21 @@ end
     
 end );
 
-BindGlobal( "CoFreydCategoryAsOppositeOfFreydCategoryOfOppositePrecompiled", function ( underlying_category )
+BindGlobal( "CoFreydCategory_as_Opposite_FreydCategory_Opposite_precompiled", function ( underlying_category )
   local category_constructor, cat;
     
     category_constructor :=
         
         
         function ( underlying_category )
-    return CoFreydCategoryAsOppositeOfFreydCategoryOfOpposite( underlying_category );
+    return CoFreydCategory_as_Opposite_FreydCategory_Opposite( underlying_category );
 end;
         
         
     
     cat := category_constructor( underlying_category : FinalizeCategory := false, no_precompiled_code := true );
     
-    ADD_FUNCTIONS_FOR_CoFreydCategoryAsOppositeOfFreydCategoryOfOppositePrecompiled( cat );
+    ADD_FUNCTIONS_FOR_CoFreydCategory_as_Opposite_FreydCategory_Opposite_precompiled( cat );
     
     Finalize( cat );
     

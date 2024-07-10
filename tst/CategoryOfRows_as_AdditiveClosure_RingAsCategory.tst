@@ -1,10 +1,10 @@
-gap> START_TEST( "CategoryOfRowsAsAdditiveClosureOfRingAsCategory" );
+gap> START_TEST( "CategoryOfRows_as_AdditiveClosure_RingAsCategory" );
 
 #
 gap> LoadPackage( "FreydCategoriesForCAP", false );
 true
 gap> QQ := HomalgFieldOfRationals( );;
-gap> vec := CategoryOfRowsAsAdditiveClosureOfRingAsCategory( QQ );
+gap> vec := CategoryOfRows_as_AdditiveClosure_RingAsCategory( QQ );
 Rows( Q )
 gap> a := CategoryOfRowsObject( vec, 3 );
 <A row module over Q of rank 3>
@@ -120,4 +120,4 @@ gap> IsCongruentForMorphisms( mor, beta );
 true
 
 #
-gap> STOP_TEST( "CategoryOfRowsAsAdditiveClosureOfRingAsCategory" );
+gap> STOP_TEST( "CategoryOfRows_as_AdditiveClosure_RingAsCategory" );

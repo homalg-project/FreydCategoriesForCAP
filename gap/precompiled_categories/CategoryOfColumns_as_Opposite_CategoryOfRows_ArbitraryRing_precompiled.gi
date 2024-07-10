@@ -3,7 +3,7 @@
 #
 # Implementations
 #
-BindGlobal( "ADD_FUNCTIONS_FOR_CategoryOfRowsAsAdditiveClosureOfRingAsCategoryOfArbitraryRingPrecompiled", function ( cat )
+BindGlobal( "ADD_FUNCTIONS_FOR_CategoryOfColumns_as_Opposite_CategoryOfRows_ArbitraryRing_precompiled", function ( cat )
     
     ##
     AddAdditionForMorphisms( cat,
@@ -43,7 +43,7 @@ end
         
 ########
 function ( cat_1, alpha_1, beta_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Range( alpha_1 ), Range( beta_1 ), UnderlyingMatrix, SafeLeftDivide( UnderlyingMatrix( alpha_1 ), UnderlyingMatrix( beta_1 ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Range( alpha_1 ), Range( beta_1 ), UnderlyingMatrix, SafeRightDivide( UnderlyingMatrix( beta_1 ), UnderlyingMatrix( alpha_1 ) ) );
 end
 ########
         
@@ -54,7 +54,7 @@ end
         
 ########
 function ( cat_1, epsilon_1, tau_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Range( epsilon_1 ), Range( tau_1 ), UnderlyingMatrix, UniqueLeftDivide( UnderlyingMatrix( epsilon_1 ), UnderlyingMatrix( tau_1 ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Range( epsilon_1 ), Range( tau_1 ), UnderlyingMatrix, UniqueRightDivide( UnderlyingMatrix( tau_1 ), UnderlyingMatrix( epsilon_1 ) ) );
 end
 ########
         
@@ -68,7 +68,7 @@ function ( cat_1, alpha_1, S_1, i_1 )
     local deduped_1_1, deduped_2_1;
     deduped_2_1 := List( S_1, RankOfObject );
     deduped_1_1 := Sum( deduped_2_1{[ 1 .. i_1 - 1 ]} );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, S_1[i_1], Range( alpha_1 ), UnderlyingMatrix, CertainRows( UnderlyingMatrix( alpha_1 ), [ deduped_1_1 + 1 .. deduped_1_1 + deduped_2_1[i_1] ] ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, S_1[i_1], Range( alpha_1 ), UnderlyingMatrix, CertainColumns( UnderlyingMatrix( alpha_1 ), [ deduped_1_1 + 1 .. deduped_1_1 + deduped_2_1[i_1] ] ) );
 end
 ########
         
@@ -82,7 +82,7 @@ function ( cat_1, alpha_1, S_1, i_1 )
     local deduped_1_1, deduped_2_1;
     deduped_2_1 := List( S_1, RankOfObject );
     deduped_1_1 := Sum( deduped_2_1{[ 1 .. i_1 - 1 ]} );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( alpha_1 ), S_1[i_1], UnderlyingMatrix, CertainColumns( UnderlyingMatrix( alpha_1 ), [ deduped_1_1 + 1 .. deduped_1_1 + deduped_2_1[i_1] ] ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( alpha_1 ), S_1[i_1], UnderlyingMatrix, CertainRows( UnderlyingMatrix( alpha_1 ), [ deduped_1_1 + 1 .. deduped_1_1 + deduped_2_1[i_1] ] ) );
 end
 ########
         
@@ -126,9 +126,9 @@ end
         
 ########
 function ( cat_1, a_1, b_1 )
-    local morphism_attr_3_1;
-    morphism_attr_3_1 := ReducedSyzygiesOfColumns( UnderlyingMatrix( a_1 ), UnderlyingMatrix( b_1 ) );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Range( a_1 ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_3_1 ) ), UnderlyingMatrix, morphism_attr_3_1 );
+    local morphism_attr_1_1;
+    morphism_attr_1_1 := ReducedSyzygiesOfRows( UnderlyingMatrix( a_1 ), UnderlyingMatrix( b_1 ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Range( a_1 ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
         
@@ -143,7 +143,7 @@ function ( cat_1, objects_1, k_1, P_1 )
     deduped_3_1 := UnderlyingRing( cat_1 );
     deduped_2_1 := List( objects_1, RankOfObject );
     deduped_1_1 := deduped_2_1[k_1];
-    return CreateCapCategoryMorphismWithAttributes( cat_1, objects_1[k_1], P_1, UnderlyingMatrix, UnionOfColumns( HomalgZeroMatrix( deduped_1_1, Sum( deduped_2_1{[ 1 .. k_1 - 1 ]} ), deduped_3_1 ), HomalgIdentityMatrix( deduped_1_1, deduped_3_1 ), HomalgZeroMatrix( deduped_1_1, Sum( deduped_2_1{[ k_1 + 1 .. Length( objects_1 ) ]} ), deduped_3_1 ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, objects_1[k_1], P_1, UnderlyingMatrix, UnionOfRows( HomalgZeroMatrix( Sum( deduped_2_1{[ 1 .. k_1 - 1 ]} ), deduped_1_1, deduped_3_1 ), HomalgIdentityMatrix( deduped_1_1, deduped_3_1 ), HomalgZeroMatrix( Sum( deduped_2_1{[ k_1 + 1 .. Length( objects_1 ) ]} ), deduped_1_1, deduped_3_1 ) ) );
 end
 ########
         
@@ -154,7 +154,7 @@ end
         
 ########
 function ( cat_1, arg2_1, arg3_1 )
-    return IsZero( DecideZeroColumns( UnderlyingMatrix( arg3_1 ), UnderlyingMatrix( arg2_1 ) ) );
+    return IsZero( DecideZeroRows( UnderlyingMatrix( arg3_1 ), UnderlyingMatrix( arg2_1 ) ) );
 end
 ########
         
@@ -198,7 +198,7 @@ end
         
 ########
 function ( cat_1, arg2_1, arg3_1 )
-    return IsZero( DecideZeroRows( UnderlyingMatrix( arg2_1 ), UnderlyingMatrix( arg3_1 ) ) );
+    return IsZero( DecideZeroColumns( UnderlyingMatrix( arg2_1 ), UnderlyingMatrix( arg3_1 ) ) );
 end
 ########
         
@@ -213,9 +213,9 @@ function ( cat_1, alpha_1 )
     deduped_1_1 := UnderlyingMatrix( alpha_1 );
     if not IsHomalgMatrix( deduped_1_1 ) then
         return false;
-    elif not NumberRows( deduped_1_1 ) = RankOfObject( Source( alpha_1 ) ) then
+    elif not NumberRows( deduped_1_1 ) = RankOfObject( Range( alpha_1 ) ) then
         return false;
-    elif not NumberColumns( deduped_1_1 ) = RankOfObject( Range( alpha_1 ) ) then
+    elif not NumberColumns( deduped_1_1 ) = RankOfObject( Source( alpha_1 ) ) then
         return false;
     else
         return true;
@@ -273,7 +273,7 @@ end
         
 ########
 function ( cat_1, alpha_1, beta_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( alpha_1 ), Source( beta_1 ), UnderlyingMatrix, SafeRightDivide( UnderlyingMatrix( alpha_1 ), UnderlyingMatrix( beta_1 ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( alpha_1 ), Source( beta_1 ), UnderlyingMatrix, SafeLeftDivide( UnderlyingMatrix( beta_1 ), UnderlyingMatrix( alpha_1 ) ) );
 end
 ########
         
@@ -284,7 +284,7 @@ end
         
 ########
 function ( cat_1, iota_1, tau_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( tau_1 ), Source( iota_1 ), UnderlyingMatrix, UniqueRightDivide( UnderlyingMatrix( tau_1 ), UnderlyingMatrix( iota_1 ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( tau_1 ), Source( iota_1 ), UnderlyingMatrix, UniqueLeftDivide( UnderlyingMatrix( iota_1 ), UnderlyingMatrix( tau_1 ) ) );
 end
 ########
         
@@ -335,11 +335,11 @@ end
     , 100 );
     
     ##
-    AddPreCompose( cat,
+    AddPostCompose( cat,
         
 ########
-function ( cat_1, alpha_1, beta_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( alpha_1 ), Range( beta_1 ), UnderlyingMatrix, UnderlyingMatrix( alpha_1 ) * UnderlyingMatrix( beta_1 ) );
+function ( cat_1, beta_1, alpha_1 )
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( alpha_1 ), Range( beta_1 ), UnderlyingMatrix, UnderlyingMatrix( beta_1 ) * UnderlyingMatrix( alpha_1 ) );
 end
 ########
         
@@ -354,7 +354,7 @@ function ( cat_1, objects_1, k_1, P_1 )
     deduped_3_1 := UnderlyingRing( cat_1 );
     deduped_2_1 := List( objects_1, RankOfObject );
     deduped_1_1 := deduped_2_1[k_1];
-    return CreateCapCategoryMorphismWithAttributes( cat_1, P_1, objects_1[k_1], UnderlyingMatrix, UnionOfRows( HomalgZeroMatrix( Sum( deduped_2_1{[ 1 .. k_1 - 1 ]} ), deduped_1_1, deduped_3_1 ), HomalgIdentityMatrix( deduped_1_1, deduped_3_1 ), HomalgZeroMatrix( Sum( deduped_2_1{[ k_1 + 1 .. Length( objects_1 ) ]} ), deduped_1_1, deduped_3_1 ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, P_1, objects_1[k_1], UnderlyingMatrix, UnionOfColumns( HomalgZeroMatrix( deduped_1_1, Sum( deduped_2_1{[ 1 .. k_1 - 1 ]} ), deduped_3_1 ), HomalgIdentityMatrix( deduped_1_1, deduped_3_1 ), HomalgZeroMatrix( deduped_1_1, Sum( deduped_2_1{[ k_1 + 1 .. Length( objects_1 ) ]} ), deduped_3_1 ) ) );
 end
 ########
         
@@ -365,9 +365,9 @@ end
         
 ########
 function ( cat_1, a_1, b_1 )
-    local morphism_attr_3_1;
-    morphism_attr_3_1 := ReducedSyzygiesOfRows( UnderlyingMatrix( a_1 ), UnderlyingMatrix( b_1 ) );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_3_1 ) ), Source( a_1 ), UnderlyingMatrix, morphism_attr_3_1 );
+    local morphism_attr_1_1;
+    morphism_attr_1_1 := ReducedSyzygiesOfColumns( UnderlyingMatrix( a_1 ), UnderlyingMatrix( b_1 ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_1_1 ) ), Source( a_1 ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
         
@@ -378,7 +378,7 @@ end
         
 ########
 function ( cat_1, mor_1, n_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( mor_1 ), Range( mor_1 ), UnderlyingMatrix, SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[1] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( mor_1 ), Range( mor_1 ), UnderlyingMatrix, SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[1] );
 end
 ########
         
@@ -391,7 +391,7 @@ end
 function ( cat_1, mor_1, n_1 )
     local deduped_1_1;
     deduped_1_1 := Range( mor_1 );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[2] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[2] );
 end
 ########
         
@@ -404,7 +404,7 @@ end
 function ( cat_1, mor_1, n_1 )
     local deduped_1_1;
     deduped_1_1 := Range( mor_1 );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[3] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[3] );
 end
 ########
         
@@ -415,7 +415,7 @@ end
         
 ########
 function ( cat_1, mor_1, n_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( mor_1 ), Range( mor_1 ), UnderlyingMatrix, SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[1] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Source( mor_1 ), Range( mor_1 ), UnderlyingMatrix, SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[1] );
 end
 ########
         
@@ -439,7 +439,7 @@ end
 function ( cat_1, mor_1, n_1 )
     local deduped_1_1;
     deduped_1_1 := Range( mor_1 );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices( UnderlyingMatrix( mor_1 ) )[3] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices( UnderlyingMatrix( mor_1 ) )[2] );
 end
 ########
         
@@ -452,7 +452,7 @@ end
 function ( cat_1, mor_1, n_1 )
     local deduped_1_1;
     deduped_1_1 := Source( mor_1 );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices( UnderlyingMatrix( mor_1 ) )[4] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices( UnderlyingMatrix( mor_1 ) )[5] );
 end
 ########
         
@@ -465,7 +465,7 @@ end
 function ( cat_1, mor_1, n_1 )
     local deduped_1_1;
     deduped_1_1 := Range( mor_1 );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices( UnderlyingMatrix( mor_1 ) )[5] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices( UnderlyingMatrix( mor_1 ) )[4] );
 end
 ########
         
@@ -478,7 +478,7 @@ end
 function ( cat_1, mor_1, n_1 )
     local deduped_1_1;
     deduped_1_1 := Source( mor_1 );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices( UnderlyingMatrix( mor_1 ) )[2] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftAndRightMultiplicationWithInvertibleMatrices( UnderlyingMatrix( mor_1 ) )[3] );
 end
 ########
         
@@ -491,7 +491,7 @@ end
 function ( cat_1, mor_1, n_1 )
     local deduped_1_1;
     deduped_1_1 := Source( mor_1 );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[3] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[3] );
 end
 ########
         
@@ -504,7 +504,7 @@ end
 function ( cat_1, mor_1, n_1 )
     local deduped_1_1;
     deduped_1_1 := Source( mor_1 );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByLeftMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[2] );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, deduped_1_1, deduped_1_1, UnderlyingMatrix, SimplifyHomalgMatrixByRightMultiplicationWithInvertibleMatrix( UnderlyingMatrix( mor_1 ) )[2] );
 end
 ########
         
@@ -516,8 +516,8 @@ end
 ########
 function ( cat_1, alpha_1 )
     local morphism_attr_1_1;
-    morphism_attr_1_1 := CATEGORY_OF_ROWS_ReductionBySplitEpiSummandTuple( alpha_1 )[1];
-    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
+    morphism_attr_1_1 := CATEGORY_OF_COLUMNS_ReductionBySplitEpiSummandTuple( alpha_1 )[1];
+    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
         
@@ -529,8 +529,8 @@ end
 ########
 function ( cat_1, alpha_1 )
     local morphism_attr_1_1;
-    morphism_attr_1_1 := CATEGORY_OF_ROWS_ReductionBySplitEpiSummandTuple( alpha_1 )[2];
-    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
+    morphism_attr_1_1 := CATEGORY_OF_COLUMNS_ReductionBySplitEpiSummandTuple( alpha_1 )[2];
+    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
         
@@ -542,8 +542,8 @@ end
 ########
 function ( cat_1, alpha_1 )
     local morphism_attr_1_1;
-    morphism_attr_1_1 := CATEGORY_OF_ROWS_ReductionBySplitEpiSummandTuple( alpha_1 )[3];
-    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
+    morphism_attr_1_1 := CATEGORY_OF_COLUMNS_ReductionBySplitEpiSummandTuple( alpha_1 )[3];
+    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_1_1 ) ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
         
@@ -554,7 +554,7 @@ end
         
 ########
 function ( cat_1, source_1, list_of_morphisms_1, range_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, source_1, range_1, UnderlyingMatrix, Sum( List( list_of_morphisms_1, UnderlyingMatrix ), HomalgZeroMatrix( RankOfObject( source_1 ), RankOfObject( range_1 ), UnderlyingRing( cat_1 ) ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, source_1, range_1, UnderlyingMatrix, Sum( List( list_of_morphisms_1, UnderlyingMatrix ), HomalgZeroMatrix( RankOfObject( range_1 ), RankOfObject( source_1 ), UnderlyingRing( cat_1 ) ) ) );
 end
 ########
         
@@ -565,7 +565,7 @@ end
         
 ########
 function ( cat_1, objects_1, T_1, tau_1, P_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, P_1, T_1, UnderlyingMatrix, UnionOfRows( UnderlyingRing( cat_1 ), RankOfObject( T_1 ), List( tau_1, UnderlyingMatrix ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, P_1, T_1, UnderlyingMatrix, UnionOfColumns( UnderlyingRing( cat_1 ), RankOfObject( T_1 ), List( tau_1, UnderlyingMatrix ) ) );
 end
 ########
         
@@ -576,7 +576,7 @@ end
         
 ########
 function ( cat_1, T_1, P_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, P_1, T_1, UnderlyingMatrix, HomalgZeroMatrix( 0, RankOfObject( T_1 ), UnderlyingRing( cat_1 ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, P_1, T_1, UnderlyingMatrix, HomalgZeroMatrix( RankOfObject( T_1 ), 0, UnderlyingRing( cat_1 ) ) );
 end
 ########
         
@@ -587,7 +587,7 @@ end
         
 ########
 function ( cat_1, objects_1, T_1, tau_1, P_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, T_1, P_1, UnderlyingMatrix, UnionOfColumns( UnderlyingRing( cat_1 ), RankOfObject( T_1 ), List( tau_1, UnderlyingMatrix ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, T_1, P_1, UnderlyingMatrix, UnionOfRows( UnderlyingRing( cat_1 ), RankOfObject( T_1 ), List( tau_1, UnderlyingMatrix ) ) );
 end
 ########
         
@@ -598,7 +598,7 @@ end
         
 ########
 function ( cat_1, T_1, P_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, T_1, P_1, UnderlyingMatrix, HomalgZeroMatrix( RankOfObject( T_1 ), 0, UnderlyingRing( cat_1 ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, T_1, P_1, UnderlyingMatrix, HomalgZeroMatrix( 0, RankOfObject( T_1 ), UnderlyingRing( cat_1 ) ) );
 end
 ########
         
@@ -610,8 +610,8 @@ end
 ########
 function ( cat_1, alpha_1 )
     local morphism_attr_1_1;
-    morphism_attr_1_1 := ReducedSyzygiesOfColumns( UnderlyingMatrix( alpha_1 ) );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, Range( alpha_1 ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
+    morphism_attr_1_1 := ReducedSyzygiesOfRows( UnderlyingMatrix( alpha_1 ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, Range( alpha_1 ), CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_1_1 ) ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
         
@@ -623,8 +623,8 @@ end
 ########
 function ( cat_1, alpha_1 )
     local morphism_attr_1_1;
-    morphism_attr_1_1 := ReducedSyzygiesOfRows( UnderlyingMatrix( alpha_1 ) );
-    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberRows( morphism_attr_1_1 ) ), Source( alpha_1 ), UnderlyingMatrix, morphism_attr_1_1 );
+    morphism_attr_1_1 := ReducedSyzygiesOfColumns( UnderlyingMatrix( alpha_1 ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, CreateCapCategoryObjectWithAttributes( cat_1, RankOfObject, NumberColumns( morphism_attr_1_1 ) ), Source( alpha_1 ), UnderlyingMatrix, morphism_attr_1_1 );
 end
 ########
         
@@ -635,7 +635,7 @@ end
         
 ########
 function ( cat_1, a_1, b_1 )
-    return CreateCapCategoryMorphismWithAttributes( cat_1, a_1, b_1, UnderlyingMatrix, HomalgZeroMatrix( RankOfObject( a_1 ), RankOfObject( b_1 ), UnderlyingRing( cat_1 ) ) );
+    return CreateCapCategoryMorphismWithAttributes( cat_1, a_1, b_1, UnderlyingMatrix, HomalgZeroMatrix( RankOfObject( b_1 ), RankOfObject( a_1 ), UnderlyingRing( cat_1 ) ) );
 end
 ########
         
@@ -663,21 +663,21 @@ end
     
 end );
 
-BindGlobal( "CategoryOfRowsAsAdditiveClosureOfRingAsCategoryOfArbitraryRingPrecompiled", function ( homalg_ring )
+BindGlobal( "CategoryOfColumns_as_Opposite_CategoryOfRows_ArbitraryRing_precompiled", function ( homalg_ring )
   local category_constructor, cat;
     
     category_constructor :=
         
         
         function ( homalg_ring )
-    return CategoryOfRows( homalg_ring );
+    return CategoryOfColumns( homalg_ring );
 end;
         
         
     
     cat := category_constructor( homalg_ring : FinalizeCategory := false, no_precompiled_code := true );
     
-    ADD_FUNCTIONS_FOR_CategoryOfRowsAsAdditiveClosureOfRingAsCategoryOfArbitraryRingPrecompiled( cat );
+    ADD_FUNCTIONS_FOR_CategoryOfColumns_as_Opposite_CategoryOfRows_ArbitraryRing_precompiled( cat );
     
     Finalize( cat );
     

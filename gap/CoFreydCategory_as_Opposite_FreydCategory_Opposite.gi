@@ -11,7 +11,7 @@
 ####################################
 
 ##
-InstallMethod( CoFreydCategoryAsOppositeOfFreydCategoryOfOpposite,
+InstallMethod( CoFreydCategory_as_Opposite_FreydCategory_Opposite,
                [ IsCapCategory ],
                
   function ( underlying_category )

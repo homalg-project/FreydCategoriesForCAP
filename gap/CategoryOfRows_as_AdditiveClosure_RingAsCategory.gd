@@ -11,7 +11,7 @@
 ##
 ####################################
 
-DeclareOperation( "CategoryOfRowsAsAdditiveClosureOfRingAsCategory",
+DeclareOperation( "CategoryOfRows_as_AdditiveClosure_RingAsCategory",
                   [ IsHomalgRing ] );
 
 # helper for compilation
